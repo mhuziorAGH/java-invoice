@@ -39,12 +39,22 @@ public class Invoice {
     }
 
     public BigDecimal getTax() {
-
-        return BigDecimal.ZERO;
+        return getGrossValue().subtract(getNetValue());
     }
 
     public BigDecimal getGrossValue() {
+        BigDecimal value = BigDecimal.ZERO;
+        // dla kardego produktu po mapie
+        //dodaj cene do value
 
-        return BigDecimal.ZERO;
+        for (Product product : this.products.keySet()) {
+            Integer quantity = this.products.get(product);
+            BigDecimal price = product.getPriceWithTax();
+            price = price.multiply(BigDecimal.valueOf(quantity));
+            value = value.add(price);
+        }
+
+        return value;
+
     }
 }
