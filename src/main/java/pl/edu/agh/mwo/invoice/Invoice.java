@@ -26,7 +26,21 @@ public class Invoice {
         StringBuilder builder = new StringBuilder();
         builder.append("Faktura numer: ").append(this.number).append("\n");
 
+        for (Map.Entry<Product, Integer> entry : this.products.entrySet()) {
+            Product product = entry.getKey();
+            Integer quantity = entry.getValue();
+            builder.append(product.getName())
+                    .append(", ")
+                    .append(quantity)
+                    .append(", ")
+                    .append(product.getPrice())
+                    .append("\n");
+        }
+
+        //Liczone po kluczach, klucz = pozycja na fv
+        builder.append("Liczba pozycji: ").append(this.products.size());
         return builder.toString();
+
     }
 
 
