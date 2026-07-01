@@ -124,4 +124,19 @@ public class InvoiceTest {
     public void testAddingNullProduct() {
         invoice.addProduct(null);
     }
+
+    @Test
+    public void testTwoInvoicesHaveDifferentNumbers() {
+        Invoice invoice1 = new Invoice();
+        Invoice invoice2 = new Invoice();
+        Assert.assertNotEquals(invoice1.getNumber(), invoice2.getNumber());
+    }
+
+    @Test
+    public void testSecondInvoiceHasHigherNumberThanFirst() {
+        Invoice invoice1 = new Invoice();
+        Invoice invoice2 = new Invoice();
+        // numeracja powinna rosnąć, a nie być losowa
+        Assert.assertTrue(invoice2.getNumber() > invoice1.getNumber());
+    }
 }

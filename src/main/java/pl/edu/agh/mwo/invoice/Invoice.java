@@ -1,16 +1,25 @@
 package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
 
-    private Map<Product, Integer> products = new HashMap<Product, Integer>();
+    private static int nextNumber = 1;
+
+    private final int number;
+
+    private Map<Product, Integer> products = new LinkedHashMap<Product, Integer>();
+
+    public Invoice() {
+        this.number = nextNumber++;
+    }
+
+    public int getNumber() {
+        return number;
+    }
 
 
     public void addProduct(Product product) {
@@ -31,8 +40,6 @@ public class Invoice {
 
     public BigDecimal getNetValue() {
         BigDecimal value = BigDecimal.ZERO;
-        // dla kardego produktu po mapie
-        //dodaj cene do value
 
         for (Product product : this.products.keySet()) {
             Integer quantity = this.products.get(product);
@@ -50,8 +57,6 @@ public class Invoice {
 
     public BigDecimal getGrossValue() {
         BigDecimal value = BigDecimal.ZERO;
-        // dla kardego produktu po mapie
-        //dodaj cene do value
 
         for (Product product : this.products.keySet()) {
             Integer quantity = this.products.get(product);
