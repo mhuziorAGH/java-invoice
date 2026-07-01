@@ -52,12 +52,16 @@ public class Invoice {
     }
 
     public void addProduct(Product product, Integer quantity) {
+        if (product == null) {
+            throw new IllegalArgumentException("Product cant be null");
+        }
         if (quantity == null || quantity <= 0) {
             throw new IllegalArgumentException("Quantity must be greater than 0");
         }
 
-        this.products.put(product, quantity);
-
+        Integer existingQuantity = this.products.get(product);
+        int newQuantity = (existingQuantity == null ? 0 : existingQuantity) + quantity;
+        this.products.put(product, newQuantity);
     }
 
     public BigDecimal getNetValue() {
