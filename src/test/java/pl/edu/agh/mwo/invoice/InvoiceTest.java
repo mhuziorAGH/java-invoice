@@ -139,4 +139,10 @@ public class InvoiceTest {
         // numeracja powinna rosnąć, a nie być losowa
         Assert.assertTrue(invoice2.getNumber() > invoice1.getNumber());
     }
+
+    @Test
+    public void testPrintoutStartsWithInvoiceNumber() {
+        String printout = invoice.getPrintout();
+        Assert.assertThat(printout, Matchers.startsWith("Faktura numer: " + invoice.getNumber()));
+    }
 }

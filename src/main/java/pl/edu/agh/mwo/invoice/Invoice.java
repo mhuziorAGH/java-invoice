@@ -22,6 +22,13 @@ public class Invoice {
         return number;
     }
 
+    public String getPrintout() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Faktura numer: ").append(this.number).append("\n");
+
+        return builder.toString();
+    }
+
 
     public void addProduct(Product product) {
         if (product == null) {
